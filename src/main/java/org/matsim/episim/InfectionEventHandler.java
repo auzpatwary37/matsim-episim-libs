@@ -267,7 +267,7 @@ public final class InfectionEventHandler implements Externalizable {
 			s.init(localRnd, personMap, pseudoFacilityMap, vehicleMap);
 		}
 
-		vaccinationModel.init(localRnd, personMap, pseudoFacilityMap, vehicleMap);
+		vaccinationModel.init(localRnd, personMap, pseudoFacilityMap, vehicleMap,episimConfig.getStartDate());
 
 		for (SimulationListener s : vaccinations) {
 			log.info("Executing vaccination init listener {}", s.toString());
@@ -676,8 +676,10 @@ public final class InfectionEventHandler implements Externalizable {
 		}
 
 		boolean traceable = localRnd.nextDouble() < tracingConfig.getEquipmentRate();
-
-		return new EpisimPerson(id, attrs, traceable, reporting);
+		
+		EpisimPerson p = new EpisimPerson(id, attrs, traceable, reporting);
+		//p.setVaccinationStatus(VaccinationStatus., null, iteration);
+		return p;
 	}
 
 	/**

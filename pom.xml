@@ -89,7 +89,72 @@
     </distributionManagement>
 
     <dependencies>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-csv</artifactId>
+    <version>1.9.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.2.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/info.picocli/picocli -->
+<dependency>
+    <groupId>info.picocli</groupId>
+    <artifactId>picocli</artifactId>
+    <version>4.6.3</version>
+</dependency>
+ <dependency>
+			<groupId>org.matsim</groupId>
+			<artifactId>matsim</artifactId>
+			<version>${matsim.version}</version>
+		</dependency>
 
+
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.18.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.18.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/it.unimi.dsi/fastutil -->
+<dependency>
+    <groupId>it.unimi.dsi</groupId>
+    <artifactId>fastutil</artifactId>
+    <version>8.5.8</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.typesafe/config -->
+<dependency>
+    <groupId>com.typesafe</groupId>
+    <artifactId>config</artifactId>
+    <version>1.4.2</version>
+</dependency>
+
+                <dependency>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                    <version>2.3.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-core</artifactId>
+                    <version>2.3.0.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                    <version>2.3.0.1</version>
+                </dependency>
         <!-- This is the matsim "core": -->
         <dependency>
             <groupId>org.matsim</groupId>

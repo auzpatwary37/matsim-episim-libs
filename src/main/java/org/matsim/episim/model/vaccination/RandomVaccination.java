@@ -7,11 +7,16 @@ import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.population.Person;
 import org.matsim.episim.EpisimPerson;
 import org.matsim.episim.EpisimUtils;
+import org.matsim.episim.InfectionEventHandler;
 import org.matsim.episim.VaccinationConfigGroup;
 import org.matsim.episim.model.VaccinationType;
+import org.matsim.facilities.ActivityFacility;
+import org.matsim.vehicles.Vehicle;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
@@ -29,8 +34,27 @@ public class RandomVaccination implements VaccinationModel {
 		this.rnd = rnd;
 		this.vaccinationConfig = vaccinationConfig;
 	}
-
-
+	@Override
+	public void init(SplittableRandom rnd, Map<Id<Person>, EpisimPerson> persons, Map<Id<ActivityFacility>, InfectionEventHandler.EpisimFacility> facilities, Map<Id<Vehicle>, InfectionEventHandler.EpisimVehicle> vehicles, LocalDate startDate) {
+		int totalVaccinated = 0;
+		int totalReVaccinated = 0;
+		for(Entry<LocalDate, Integer> e:this.vaccinationConfig.getVaccinationCapacity().entrySet()){
+			if(e.getKey().isBefore(startDate)) {
+				int vaccineIter = (int)ChronoUnit.DAYS.between( startDate , e.getKey());
+				totalVaccinated+=	this.handleVaccination(persons, false,e.getValue(), e.getKey(), vaccineIter, 0);
+			}
+			
+		}
+		for(Entry<LocalDate, Integer> e:this.vaccinationConfig.getReVaccinationCapacity().entrySet()){
+			if(e.getKey().isBefore(startDate)) {
+				int vaccineIter = (int)ChronoUnit.DAYS.between( startDate , e.getKey());
+				totalReVaccinated+=this.handleVaccination(persons, true,e.getValue(), e.getKey(), vaccineIter, 0);
+			}
+			
+		}
+		log.info("Initial vaccination = "+ totalVaccinated+" and initial revaccination = "+totalReVaccinated);
+	}
+	
 	@Override
 	public int handleVaccination(Map<Id<Person>, EpisimPerson> persons, boolean reVaccination, int availableVaccinations, LocalDate date, int iteration, double now) {
 

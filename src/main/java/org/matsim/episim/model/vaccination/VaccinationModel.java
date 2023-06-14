@@ -3,8 +3,11 @@ package org.matsim.episim.model.vaccination;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.population.Person;
 import org.matsim.episim.EpisimPerson;
+import org.matsim.episim.InfectionEventHandler;
 import org.matsim.episim.model.SimulationListener;
 import org.matsim.episim.model.VaccinationType;
+import org.matsim.facilities.ActivityFacility;
+import org.matsim.vehicles.Vehicle;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -35,6 +38,12 @@ public interface VaccinationModel extends SimulationListener {
 
 	}
 
+	
+	public default void init(SplittableRandom rnd, Map<Id<Person>, EpisimPerson> persons, Map<Id<ActivityFacility>, InfectionEventHandler.EpisimFacility> facilities, Map<Id<Vehicle>, InfectionEventHandler.EpisimVehicle> vehicles, LocalDate startDate) {
+		
+		
+	}
+	
 	/**
 	 * Perform vaccinations on the given persons with values supplied from config.
 	 *
